@@ -1,5 +1,8 @@
 package ua.porter.model;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Tema
@@ -9,6 +12,7 @@ package ua.porter.model;
  */
 public class Board {
     private BoardCell[][] map;
+    private List<GameObject> objectsOnTheBoard = new LinkedList<GameObject>();
 
     public Board(int dimension) {
         this.map = generateEmptyMap(dimension);
@@ -47,6 +51,12 @@ public class Board {
     }
 
 
-    public void addObject(Object porter) {
+    public void addObject(GameObject entity) {
+        objectsOnTheBoard.add(entity);
+        this.redraw();
+    }
+
+    private void redraw() {
+
     }
 }
