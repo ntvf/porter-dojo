@@ -1,6 +1,5 @@
 package ua.porter.model;
 
-import java.util.Arrays;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,18 +11,28 @@ import java.util.Arrays;
 public class GameImpl implements Game {
     private int dimension;
     private boolean gameIsRunning;
-    private String board = null;
+    private Board board;
+
     public GameImpl() {
     }
-    public  GameImpl(int dimension) {
+
+    public GameImpl(int dimension) {
+        if (dimension <= 1) {
+            throw new IllegalArgumentException("Board must be larger than 1");
+        }
         this.gameIsRunning = true;
         this.dimension = dimension;
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < dimension *dimension; i++) {
-            sb.append(" ");
-        }
-        board = sb.toString();
+        board = new Board(dimension);
+        board.addObject(new Porter(dimension - 1));
     }
+
+    public GameImpl(int dimension, int porterPositionStart) {
+        this(dimension);
+        board.addObject(new Porter(porterPositionStart));
+
+
+    }
+
     @Override
     public Joystick getJoystick() {
         return null;
@@ -51,7 +60,12 @@ public class GameImpl implements Game {
 
     @Override
     public String getBoardAsString() {
-        return this.board;
+
+        return this.board.toString();
+    }
+
+    private String placePorter(Porter ourPorter) {
+        return null;  //To change body of created methods use File | Settings | File Templates.
     }
 
     @Override

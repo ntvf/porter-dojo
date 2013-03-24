@@ -1,12 +1,8 @@
 package ua.porter.model;
 
 
-
-
 import org.junit.Test;
-import ua.porter.model.Game;
-import ua.porter.model.GameImpl;
-import java.lang.NegativeArraySizeException;
+
 
 import static org.junit.Assert.*;
 
@@ -18,27 +14,32 @@ import static org.junit.Assert.*;
  * To change this template use File | Settings | File Templates.
  */
 public class GameImplTest {
+    @Test(expected = IllegalArgumentException.class)
+    public void boardInitialization_Decimal() {
+        Game ourGame = new GameImpl(-3);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void boardInitialization_Zero() {
+        Game ourGame = new GameImpl(0);
+    }
+
     @Test
     public void isRunnigAfterInit() {
         Game ourGame = new GameImpl(3);
-        assertFalse("Game is not over",ourGame.isGameOver());
+        assertFalse("The game is over after initializtion", ourGame.isGameOver());
     }
 
     @Test
-    public void isBoardExistAfterInit3() {
+    public void isBoardExistAfter_DefaultInit3() {
         Game ourGame = new GameImpl(3);
-        assertEquals("         ",ourGame.getBoardAsString());
+        assertEquals("Board is not adequate with size 3", "        ♞", ourGame.getBoardAsString());
     }
 
     @Test
-    public void isBoardExistAfterInit4() {
+    public void isPlayerCreatedAfter_DefaultInit() {
         Game ourGame = new GameImpl(4);
-        assertEquals("                ",ourGame.getBoardAsString());
-    }
-
-    @Test
-    public void isPlayerCreated() {
-        Game ourGame = new GameImpl(4);
-        assertEquals("               ♞",ourGame.getBoardAsString());
+        String board = ourGame.getBoardAsString();
+        assertEquals("Porter is not at his position", "♞", board.substring(board.length() - 2));
     }
 }
