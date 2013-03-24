@@ -8,6 +8,7 @@ package ua.porter.model;
  * To change this template use File | Settings | File Templates.
  */
 public class GameImpl implements Game {
+
     @Override
     public Joystick getJoystick() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
