@@ -9,7 +9,8 @@ package ua.porter.model;
  */
 public class Porter extends GameObject {
 
-    public Porter(int startPosition) {
+    public Porter(int startPosition, Board board) {
+        this.board = board;
         this.x = startPosition;
         this.y = 0;
     }
@@ -19,4 +20,18 @@ public class Porter extends GameObject {
     }
 
 
+    @Override
+    public void down() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void up() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void act() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

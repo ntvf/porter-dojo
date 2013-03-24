@@ -11,7 +11,7 @@ package ua.porter.model;
 public class GameImpl implements Game {
     private boolean gameIsRunning;
     private Board board;
-    private Joystick joystick;
+
 
     public GameImpl() {
     }
@@ -22,20 +22,20 @@ public class GameImpl implements Game {
         }
         this.gameIsRunning = true;
         board = new Board(dimension);
-        board.addPorter(new Porter(dimension - 1));
-        joystick = new PorterManipulator(board);
+        board.addPorter(new Porter(dimension - 1, board));
+
     }
 
     public GameImpl(int dimension, int porterPositionStart) {   //TODO fix/invent solution for
         this(dimension);                                        // creating game with custom
-        board.addPorter(new Porter(porterPositionStart));
+        board.addPorter(new Porter(porterPositionStart, board));
 
 
     }
 
     @Override
     public Joystick getJoystick() {
-        return joystick;
+        return board.getPorter();
     }
 
     @Override
@@ -62,10 +62,6 @@ public class GameImpl implements Game {
     public String getBoardAsString() {
 
         return this.board.toString();
-    }
-
-    private String placePorter(Porter ourPorter) {
-        return null;  //To change body of created methods use File | Settings | File Templates.
     }
 
     @Override

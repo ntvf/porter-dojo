@@ -24,6 +24,11 @@ public class Board {
 
     }
 
+
+    public Porter getPorter() {
+        return porter;
+    }
+
     public int getDimensionFromZero() {
         return map.length - 1;
     }
@@ -66,10 +71,10 @@ public class Board {
         addObject(porter);
     }
 
-    private void updateBoard() {
+    public void updateBoard() {
         Iterator<GameObject> it = objectsOnTheBoard.iterator();
         while (it.hasNext()) {
-            it.next().redraw(this);
+            it.next().redraw();
         }
 
     }
@@ -95,15 +100,5 @@ public class Board {
         findCell(x, y).clear();
     }
 
-    public void movePorterLeft() {
-        porter.moveLeft(this);
-        this.updateBoard();
-    }
 
-
-    public void movePorterRight() {
-        porter.moveRight(this);
-        this.updateBoard();
-
-    }
 }

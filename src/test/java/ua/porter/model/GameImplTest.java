@@ -67,7 +67,7 @@ public class GameImplTest {
         Game ourGame = new GameImpl(4);
         ourGame.getJoystick().left();
         ourGame.getJoystick().right();
-        assertEquals("Porter is not moving right", "    " +
+        assertEquals("Porter is not moving right, but it can be if he csn't move left", "    " +
                 "    " +
                 "    " +
                 "   ♞", ourGame.getBoardAsString());
