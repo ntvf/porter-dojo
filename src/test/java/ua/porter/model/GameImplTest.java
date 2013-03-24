@@ -40,6 +40,15 @@ public class GameImplTest {
     public void isPlayerCreatedAfter_DefaultInit() {
         Game ourGame = new GameImpl(4);
         String board = ourGame.getBoardAsString();
-        assertEquals("Porter is not at his position", "♞", board.substring(board.length() - 2));
+        assertEquals("There is no porter at hi default position", "♞", board.substring(board.length() - 1));
+    }
+
+    @Test
+    public void isPlayerCreatedAfter_PutPorterInit() { //TODO Broken Test
+        Game ourGame = new GameImpl(4, 3);
+        assertEquals("Porter is not at his position", "    " +
+                "    " +
+                "    " +
+                "   ♞", ourGame.getBoardAsString());
     }
 }

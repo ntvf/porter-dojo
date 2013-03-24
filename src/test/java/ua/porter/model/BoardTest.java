@@ -23,9 +23,9 @@ public class BoardTest {
     }
 
     @Test
-    public void isTrueConverting_MapToString() {
+    public void isTrueConverting_EmptyMapToString() {
         Board board = new Board(3);
-        assertEquals("False to convert empty map to String", "        ♞", board.toString());
+        assertEquals("False to convert empty map to String", "         ", board.toString());
     }
 
 }

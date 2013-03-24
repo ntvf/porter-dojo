@@ -46,4 +46,12 @@ public class BoardCell {
         code = k * code + this.y;
         return code;
     }
+
+    public void setObject(GameObject object) {
+        this.object = object;
+    }
+
+    public GameObject getObject() {
+        return this.object;
+    }
 }

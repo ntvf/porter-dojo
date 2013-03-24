@@ -1,5 +1,6 @@
 package ua.porter.model;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -43,7 +44,6 @@ public class Board {
         for (int rowIndex = 0; rowIndex <= dimension - 1; rowIndex++) {
             for (int colIndex = 0; colIndex <= dimension - 1; colIndex++) {
                 generatedMap[rowIndex][colIndex] = new BoardCell(colIndex, startHelpIndex);
-
             }
             startHelpIndex--;
         }
@@ -53,10 +53,31 @@ public class Board {
 
     public void addObject(GameObject entity) {
         objectsOnTheBoard.add(entity);
-        this.redraw();
+        this.updateBoard();
     }
 
-    private void redraw() {
+    private void updateBoard() {
+        Iterator<GameObject> it = objectsOnTheBoard.iterator();
+        while (it.hasNext()) {
+            it.next().redraw(this);
+        }
 
+    }
+
+    public BoardCell getCell(int x, int y) {
+
+        return findCell(x, y);
+    }
+
+    private BoardCell findCell(int x, int y) {
+        for (int rowIndex = 0; rowIndex < map.length; rowIndex++) {
+            for (int colIndex = 0; colIndex < map[rowIndex].length; colIndex++) {
+                if (map[rowIndex][colIndex].equals(new BoardCell(x, y))) {
+                    return map[rowIndex][colIndex];
+                }
+                ;
+            }
+        }
+        throw new IllegalArgumentException();
     }
 }

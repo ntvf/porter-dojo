@@ -12,6 +12,7 @@ public class GameImpl implements Game {
     private int dimension;
     private boolean gameIsRunning;
     private Board board;
+    private boolean customPorterPosition = false;
 
     public GameImpl() {
     }
@@ -26,10 +27,14 @@ public class GameImpl implements Game {
         board.addObject(new Porter(dimension - 1));
     }
 
-    public GameImpl(int dimension, int porterPositionStart) {
-        this(dimension);
+    public GameImpl(int dimension, int porterPositionStart) {   //TODO fix/invent solution for
+        this(dimension);                                        // creating game with custom
         board.addObject(new Porter(porterPositionStart));
 
+
+    }
+
+    private void addPorter() {
 
     }
 
