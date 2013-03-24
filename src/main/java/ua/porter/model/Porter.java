@@ -18,8 +18,5 @@ public class Porter extends GameObject {
         return ObjectsLiterals.porter;
     }
 
-    public Event redraw(Board board) {
-        board.getCell(this.x, this.y).setObject(this);
-        return new Event();
-    }
+
 }

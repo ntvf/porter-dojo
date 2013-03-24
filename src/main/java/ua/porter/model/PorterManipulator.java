@@ -8,6 +8,13 @@ package ua.porter.model;
  * To change this template use File | Settings | File Templates.
  */
 public class PorterManipulator implements Joystick {
+
+    private Board board;
+
+    public PorterManipulator(Board board) {
+        this.board = board;
+    }
+
     @Override
     public void down() {
 
@@ -20,11 +27,13 @@ public class PorterManipulator implements Joystick {
 
     @Override
     public void left() {
+        board.movePorterLeft();
 
     }
 
     @Override
     public void right() {
+        board.movePorterRight();
 
     }
 

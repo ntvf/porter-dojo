@@ -51,4 +51,36 @@ public class GameImplTest {
                 "    " +
                 "   ♞", ourGame.getBoardAsString());
     }
+
+    @Test
+    public void isJoystickWorking_Left() {
+        Game ourGame = new GameImpl(4);
+        ourGame.getJoystick().left();
+        assertEquals("Porter is not moving left", "    " +
+                "    " +
+                "    " +
+                "  ♞ ", ourGame.getBoardAsString());
+    }
+
+    @Test
+    public void isJoystickWorking_Right() {
+        Game ourGame = new GameImpl(4);
+        ourGame.getJoystick().left();
+        ourGame.getJoystick().right();
+        assertEquals("Porter is not moving right", "    " +
+                "    " +
+                "    " +
+                "   ♞", ourGame.getBoardAsString());
+    }
+
+    @Test
+    public void isJoystickWorkingRight_InTheEndOfTheLine() {
+        Game ourGame = new GameImpl(4);
+        ourGame.getJoystick().right();
+        assertEquals("Porter is not moving right", "    " +
+                "    " +
+                "    " +
+                "♞   ", ourGame.getBoardAsString());
+    }
+
 }

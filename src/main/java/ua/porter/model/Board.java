@@ -14,6 +14,7 @@ import java.util.List;
 public class Board {
     private BoardCell[][] map;
     private List<GameObject> objectsOnTheBoard = new LinkedList<GameObject>();
+    private Porter porter;
 
     public Board(int dimension) {
         this.map = generateEmptyMap(dimension);
@@ -21,6 +22,10 @@ public class Board {
 
     public Board(String lineMap) {      //TODO generate map from ready string
 
+    }
+
+    public int getDimensionFromZero() {
+        return map.length - 1;
     }
 
     public String toString() {
@@ -56,6 +61,11 @@ public class Board {
         this.updateBoard();
     }
 
+    public void addPorter(Porter porter) {
+        this.porter = porter;
+        addObject(porter);
+    }
+
     private void updateBoard() {
         Iterator<GameObject> it = objectsOnTheBoard.iterator();
         while (it.hasNext()) {
@@ -79,5 +89,21 @@ public class Board {
             }
         }
         throw new IllegalArgumentException();
+    }
+
+    public void clearCell(int x, int y) {
+        findCell(x, y).clear();
+    }
+
+    public void movePorterLeft() {
+        porter.moveLeft(this);
+        this.updateBoard();
+    }
+
+
+    public void movePorterRight() {
+        porter.moveRight(this);
+        this.updateBoard();
+
     }
 }

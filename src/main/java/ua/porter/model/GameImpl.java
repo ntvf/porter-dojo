@@ -9,10 +9,9 @@ package ua.porter.model;
  * To change this template use File | Settings | File Templates.
  */
 public class GameImpl implements Game {
-    private int dimension;
     private boolean gameIsRunning;
     private Board board;
-    private boolean customPorterPosition = false;
+    private Joystick joystick;
 
     public GameImpl() {
     }
@@ -22,25 +21,21 @@ public class GameImpl implements Game {
             throw new IllegalArgumentException("Board must be larger than 1");
         }
         this.gameIsRunning = true;
-        this.dimension = dimension;
         board = new Board(dimension);
-        board.addObject(new Porter(dimension - 1));
+        board.addPorter(new Porter(dimension - 1));
+        joystick = new PorterManipulator(board);
     }
 
     public GameImpl(int dimension, int porterPositionStart) {   //TODO fix/invent solution for
         this(dimension);                                        // creating game with custom
-        board.addObject(new Porter(porterPositionStart));
+        board.addPorter(new Porter(porterPositionStart));
 
-
-    }
-
-    private void addPorter() {
 
     }
 
     @Override
     public Joystick getJoystick() {
-        return null;
+        return joystick;
     }
 
     @Override

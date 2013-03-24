@@ -54,4 +54,8 @@ public class BoardCell {
     public GameObject getObject() {
         return this.object;
     }
+
+    public void clear() {
+        this.object = null;
+    }
 }
