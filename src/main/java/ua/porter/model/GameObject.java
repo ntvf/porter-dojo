@@ -8,6 +8,7 @@ package ua.porter.model;
  * To change this template use File | Settings | File Templates.
  */
 public abstract class GameObject implements Joystick {
+    protected boolean isFlying;
     protected int x;
     protected int y;
     protected Board board;
@@ -16,6 +17,36 @@ public abstract class GameObject implements Joystick {
 
         board.getCell(this.x, this.y).setObject(this);
         return new Event();
+    }
+
+    protected boolean shouldFell() {
+        return (this.y > 0 && board.getCell(this.x, this.y - 1).isEmpty());
+
+    }
+
+    protected boolean canMoveLeft() { //TODO canMoveLeft
+        return true;
+    }
+
+    protected boolean canMoveRight() { //TODO canMoveRight
+        return true;
+    }
+
+    public void down() {
+        board.clearCell(this.x, this.y);
+        this.y -= 1;
+
+        redraw();
+
+    }
+
+    public void up() {
+        board.clearCell(this.x, this.y);
+        if (this.y < board.getDimensionFromZero()) {
+            this.y += 1;
+        }
+
+        redraw();
     }
 
     public void left() {

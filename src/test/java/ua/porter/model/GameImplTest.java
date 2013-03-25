@@ -83,4 +83,158 @@ public class GameImplTest {
                 "♞   ", ourGame.getBoardAsString());
     }
 
+    @Test
+    public void PorterCanJump_Right() {
+        Game ourGame = new GameImpl(4);
+        ourGame.getJoystick().up();
+        ourGame.getJoystick().right();
+        assertEquals("Porter is not jumping right", "    " +
+                "    " +
+                "♞   " +
+                "    ", ourGame.getBoardAsString());
+    }
+
+    @Test
+    public void PorterCanJump_Left() {
+        Game ourGame = new GameImpl(4);
+        ourGame.getJoystick().up();
+        ourGame.getJoystick().left();
+        assertEquals("Porter is not jumping left", "    " +
+                "    " +
+                "  ♞ " +
+                "    ", ourGame.getBoardAsString());
+    }
+
+    @Test
+    public void PorterJumpingRight_AndFellingToTheGroun() {
+        Game ourGame = new GameImpl(4);
+        ourGame.getJoystick().up();
+        ourGame.getJoystick().right();
+        ourGame.tick();
+        ourGame.getJoystick().right();
+        assertEquals("Porter is not jumping left and felling to the ground", "    " +
+                "    " +
+                "    " +
+                "♞   ", ourGame.getBoardAsString());
+    }
+
+    @Test
+    public void PorterJumpingLeft_AndFellingToTheGroun() {
+        Game ourGame = new GameImpl(4);
+        ourGame.getJoystick().up();
+        ourGame.getJoystick().left();
+        ourGame.tick();
+        ourGame.getJoystick().left();
+
+        assertEquals("Porter is not jumping right and felling to the ground", "    " +
+                "    " +
+                "    " +
+                "  ♞ ", ourGame.getBoardAsString());
+    }
+
+    @Test
+    public void PorterJumpingLeft_AndFellingToTheGround_AfterUpInJump() {
+        Game ourGame = new GameImpl(4);
+        ourGame.getJoystick().up();
+        ourGame.getJoystick().left();
+        ourGame.getJoystick().up();
+        assertEquals("Porter is not felling down after up in left jump", "    " +
+                "    " +
+                "    " +
+                "  ♞ ", ourGame.getBoardAsString());
+    }
+
+    @Test
+    public void PorterJumpingLeft_AndFellingToTheGround_AfterLeftInJump() {
+        Game ourGame = new GameImpl(4);
+        ourGame.getJoystick().up();
+        ourGame.getJoystick().left();
+        ourGame.getJoystick().left();
+        assertEquals("Porter is not felling down after left in left jump", "    " +
+                "    " +
+                "    " +
+                "  ♞ ", ourGame.getBoardAsString());
+    }
+
+    @Test
+    public void PorterJumpingLeft_AndFellingToTheGround_AfterRightInJump() {
+        Game ourGame = new GameImpl(4);
+        ourGame.getJoystick().up();
+        ourGame.getJoystick().left();
+        ourGame.getJoystick().right();
+        assertEquals("Porter is not felling down after right in left jump", "    " +
+                "    " +
+                "    " +
+                "  ♞ ", ourGame.getBoardAsString());
+    }
+
+    @Test
+    public void PorterJumpingRight_AndFellingToTheGround_AfterUpInJump() {
+        Game ourGame = new GameImpl(4);
+        ourGame.getJoystick().up();
+        ourGame.getJoystick().right();
+        ourGame.getJoystick().up();
+        assertEquals("Porter is not felling down after up in right jump", "    " +
+                "    " +
+                "    " +
+                "♞   ", ourGame.getBoardAsString());
+    }
+
+    @Test
+    public void PorterJumpingRight_AndFellingToTheGround_AfterLeftInJump() {
+        Game ourGame = new GameImpl(4);
+        ourGame.getJoystick().up();
+        ourGame.getJoystick().right();
+        ourGame.getJoystick().left();
+        assertEquals("Porter is not felling down after left in right jump", "    " +
+                "    " +
+                "    " +
+                "♞   ", ourGame.getBoardAsString());
+    }
+
+    @Test
+    public void PorterJumpingRight_AndFellingToTheGround_AfterRightInJump() {
+        Game ourGame = new GameImpl(4);
+        ourGame.getJoystick().up();
+        ourGame.getJoystick().right();
+        ourGame.getJoystick().right();
+        //ourGame.getJoystick().up();
+        // ourGame.getJoystick().left();
+        assertEquals("Porter is not felling down after right in right jump", "    " +
+                "    " +
+                "    " +
+                "♞   ", ourGame.getBoardAsString());
+    }
+
+    @Test
+    public void PorterJumpingRight_AndFellingToTheGround_AndMovingRight_AndJumpingRight_AndFellingToTheGround() {
+        Game ourGame = new GameImpl(4);
+        ourGame.getJoystick().up();
+        ourGame.getJoystick().right();
+        ourGame.getJoystick().right();
+        ourGame.getJoystick().right();
+        ourGame.getJoystick().up();
+        ourGame.getJoystick().right();
+        ourGame.getJoystick().right();
+        assertEquals("    " +
+                "    " +
+                "    " +
+                "  ♞ ", ourGame.getBoardAsString());
+    }
+
+    @Test
+    public void PorterJumpingLeft_AndFellingToTheGround_AndMovingLeft_AndJumpingLeft_AndFellingToTheGround() {
+        Game ourGame = new GameImpl(4);
+        ourGame.getJoystick().up();
+        ourGame.getJoystick().left();
+        ourGame.getJoystick().left();
+        ourGame.getJoystick().left();
+        ourGame.getJoystick().up();
+        ourGame.getJoystick().left();
+        ourGame.getJoystick().left();
+        assertEquals("Porter is not felling down after right in right jump", "    " +
+                "    " +
+                "    " +
+                "♞   ", ourGame.getBoardAsString());
+    }
 }

@@ -1,5 +1,7 @@
 package ua.porter.model;
 
+import java.util.Scanner;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Tema
@@ -9,10 +11,29 @@ package ua.porter.model;
  */
 public class MainLoop {
     public static void main(String[] args) {
-        Game porterGame = new GameImpl();
+        Game porterGame = new GameImpl(15);
+        System.out.println(split(porterGame.getBoardAsString(), 15));
         while (true) {
-
+            String command = new Scanner(System.in).nextLine();
+            if (command.equals("a")) {
+                porterGame.getJoystick().left();
+            } else if (command.equals("d")) {
+                porterGame.getJoystick().right();
+            } else if (command.equals("w")) {
+                porterGame.getJoystick().up();
+            } else if (command.equals("s")) {
+                porterGame.getJoystick().down();
+            }
+            System.out.println(split(porterGame.getBoardAsString(), 15));
         }
 
+    }
+
+    private static String split(String board, int size) {
+        StringBuffer result = new StringBuffer();
+        for (int index = 0; index < size; index++) {
+            result.append(board.substring(index * size, (index + 1) * size)).append("\n");
+        }
+        return result.toString();
     }
 }

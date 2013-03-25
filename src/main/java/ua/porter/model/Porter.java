@@ -8,6 +8,7 @@ package ua.porter.model;
  * To change this template use File | Settings | File Templates.
  */
 public class Porter extends GameObject {
+    private boolean movedInJump;
 
     public Porter(int startPosition, Board board) {
         this.board = board;
@@ -19,16 +20,62 @@ public class Porter extends GameObject {
         return ObjectsLiterals.porter;
     }
 
-
-    @Override
-    public void down() {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
     @Override
     public void up() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        if (isFlying) {
+            super.down();
+            isFlying = shouldFell();
+        } else {
+            super.up();
+            isFlying = true;
+            return;
+        }
+
+
     }
+
+    @Override
+    public void left() {
+        if (isFlying) {
+            if (!movedInJump && canMoveLeft()) {
+                super.left();
+                movedInJump = true;
+                return;
+            } else {
+                super.down();
+                isFlying = shouldFell();
+                movedInJump = isFlying;
+                return;
+            }
+
+        }
+        if (canMoveLeft()) {
+            super.left();
+        }
+
+
+    }
+
+    @Override
+    public void right() {
+        if (isFlying) {
+            if (!movedInJump && canMoveRight()) {
+                super.right();
+                movedInJump = true;
+                return;
+            } else {
+                super.down();
+                isFlying = shouldFell();
+                movedInJump = isFlying;
+                return;
+            }
+
+        }
+        if (canMoveRight()) {
+            super.right();
+        }
+    }
+
 
     @Override
     public void act() {

@@ -55,6 +55,10 @@ public class BoardCell {
         return this.object;
     }
 
+    public boolean isEmpty() {
+        return (object == null);
+    }
+
     public void clear() {
         this.object = null;
     }

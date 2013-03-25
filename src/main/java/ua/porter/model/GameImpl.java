@@ -66,7 +66,6 @@ public class GameImpl implements Game {
 
     @Override
     public void tick() {
-
         this.gameIsRunning = false;
     }
 }
