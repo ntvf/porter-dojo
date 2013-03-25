@@ -27,7 +27,7 @@ public class GameImpl implements Game {
     }
 
     public GameImpl(int dimension, int porterPositionStart) {   //TODO fix/invent solution for
-        this(dimension);                                        // creating game with custom
+        this(dimension);                                        // creating game with custom porter
         board.addPorter(new Porter(porterPositionStart, board));
 
 

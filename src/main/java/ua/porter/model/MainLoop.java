@@ -13,16 +13,21 @@ public class MainLoop {
     public static void main(String[] args) {
         Game porterGame = new GameImpl(15);
         System.out.println(split(porterGame.getBoardAsString(), 15));
+        Scanner scanner = new Scanner(System.in);
         while (true) {
-            String command = new Scanner(System.in).nextLine();
-            if (command.equals("a")) {
+            String command = scanner.nextLine();
+            if (command.equals("wa")) {
+                porterGame.getJoystick().up();
+                porterGame.getJoystick().left();
+            } else if (command.equals("wd")) {
+                porterGame.getJoystick().up();
+                porterGame.getJoystick().right();
+            } else if (command.equals("a")) {
                 porterGame.getJoystick().left();
             } else if (command.equals("d")) {
                 porterGame.getJoystick().right();
             } else if (command.equals("w")) {
                 porterGame.getJoystick().up();
-            } else if (command.equals("s")) {
-                porterGame.getJoystick().down();
             }
             System.out.println(split(porterGame.getBoardAsString(), 15));
         }
