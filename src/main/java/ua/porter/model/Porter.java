@@ -21,6 +21,40 @@ public class Porter extends GameObject {
     }
 
     @Override
+    protected boolean canMoveLeft() {
+        GameObject neighbour;
+        if (this.x == 0) {
+            neighbour = board.getCell(board.getDimensionFromZero(), this.y).getObject();
+            if (neighbour == null) {
+                return true;
+            }
+            return neighbour.canMoveLeft();
+        }
+        neighbour = board.getCell(this.x - 1, this.y).getObject();
+        if (neighbour == null) {
+            return true;
+        }
+        return neighbour.canMoveLeft();
+    }
+
+    @Override
+    protected boolean canMoveRight() {
+        GameObject neighbour;
+        if (this.x == board.getDimensionFromZero()) {
+            neighbour = board.getCell(0, this.y).getObject();
+            if (neighbour == null) {
+                return true;
+            }
+            return neighbour.canMoveRight();
+        }
+        neighbour = board.getCell(this.x + 1, this.y).getObject();
+        if (neighbour == null) {
+            return true;
+        }
+        return neighbour.canMoveRight();
+    }
+
+    @Override
     public void up() {
         if (isFlying) {
             super.down();

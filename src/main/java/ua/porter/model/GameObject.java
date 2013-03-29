@@ -23,26 +23,19 @@ public abstract class GameObject implements Joystick {
 
     }
 
-    protected boolean canMoveLeft() { //TODO canMoveLeft
-        return true;
-    }
+    protected abstract boolean canMoveLeft();
 
-    protected boolean canMoveRight() { //TODO canMoveRight
-        return true;
-    }
+    protected abstract boolean canMoveRight();
 
 
     public void down() {
         if (shouldFell()) {
             clearContainingCell();
             this.y -= 1;
-
             redraw();
         } else {
-            isFlying = false;
+            isFlying = shouldFell();
         }
-
-
     }
 
     public void up() {
@@ -50,7 +43,6 @@ public abstract class GameObject implements Joystick {
         if (this.y < board.getDimensionFromZero()) {
             this.y += 1;
         }
-
         redraw();
     }
 

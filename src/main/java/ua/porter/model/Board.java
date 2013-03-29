@@ -48,19 +48,6 @@ public class Board {
         return map;
     }
 
-    private BoardCell[][] generateEmptyMap(int dimension) {
-        BoardCell[][] generatedMap = new BoardCell[dimension][dimension];
-        int startHelpIndex = dimension - 1;
-        for (int rowIndex = 0; rowIndex <= dimension - 1; rowIndex++) {
-            for (int colIndex = 0; colIndex <= dimension - 1; colIndex++) {
-                generatedMap[rowIndex][colIndex] = new BoardCell(colIndex, startHelpIndex);
-            }
-            startHelpIndex--;
-        }
-        return generatedMap;
-    }
-
-
     public void addObject(GameObject entity) {
         objectsOnTheBoard.add(entity);
     }
@@ -83,6 +70,10 @@ public class Board {
         return findCell(x, y);
     }
 
+    public void clearCell(int x, int y) {
+        findCell(x, y).clear();
+    }
+
     private BoardCell findCell(int x, int y) {
         for (int rowIndex = 0; rowIndex < map.length; rowIndex++) {
             for (int colIndex = 0; colIndex < map[rowIndex].length; colIndex++) {
@@ -95,9 +86,16 @@ public class Board {
         throw new IllegalArgumentException();
     }
 
-    public void clearCell(int x, int y) {
-        findCell(x, y).clear();
+    private BoardCell[][] generateEmptyMap(int dimension) {
+        BoardCell[][] generatedMap = new BoardCell[dimension][dimension];
+        int startHelpIndex = dimension - 1;
+        for (int rowIndex = 0; rowIndex <= dimension - 1; rowIndex++) {
+            for (int colIndex = 0; colIndex <= dimension - 1; colIndex++) {
+                generatedMap[rowIndex][colIndex] = new BoardCell(colIndex, startHelpIndex);
+            }
+            startHelpIndex--;
+        }
+        return generatedMap;
     }
-
 
 }

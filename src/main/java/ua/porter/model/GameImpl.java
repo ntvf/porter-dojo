@@ -24,7 +24,7 @@ public class GameImpl implements Game {
         this.gameIsRunning = true;
         board = new Board(dimension);
         board.addPorter(new Porter(dimension - 1, board));
-        this.boxGenerator = new BoxGenerator(board);
+        this.boxGenerator = new SimpleBoxGenerator(board);
 
     }
 

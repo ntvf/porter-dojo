@@ -22,4 +22,20 @@ public class Box extends GameObject {
     public boolean isFalled() {
         return this.y == 0;
     }
+
+    @Override
+    protected boolean canMoveLeft() {
+        if (this.x == 0) {
+            return board.getCell(board.getDimensionFromZero(), this.y).isEmpty();
+        }
+        return board.getCell(this.x - 1, this.y).isEmpty();
+    }
+
+    @Override
+    protected boolean canMoveRight() {
+        if (this.x == board.getDimensionFromZero()) {
+            return board.getCell(board.getDimensionFromZero(), this.y).isEmpty();
+        }
+        return board.getCell(this.x + 1, this.y).isEmpty();
+    }
 }
