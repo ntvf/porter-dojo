@@ -52,8 +52,6 @@ public class Porter extends GameObject {
         if (canMoveLeft()) {
             super.left();
         }
-
-
     }
 
     @Override
@@ -74,11 +72,5 @@ public class Porter extends GameObject {
         if (canMoveRight()) {
             super.right();
         }
-    }
-
-
-    @Override
-    public void act() {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 }

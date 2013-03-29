@@ -10,4 +10,5 @@ package ua.porter.model;
 public class ObjectsLiterals {
     public static final String emptySpase = " ";
     public static final String porter = "♞";
+    public static final String box = "¤";
 }

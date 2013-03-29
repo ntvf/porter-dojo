@@ -11,6 +11,7 @@ package ua.porter.model;
 public class GameImpl implements Game {
     private boolean gameIsRunning;
     private Board board;
+    private BoxGenerator boxGenerator;
 
 
     public GameImpl() {
@@ -23,6 +24,7 @@ public class GameImpl implements Game {
         this.gameIsRunning = true;
         board = new Board(dimension);
         board.addPorter(new Porter(dimension - 1, board));
+        this.boxGenerator = new BoxGenerator(board);
 
     }
 
@@ -55,7 +57,7 @@ public class GameImpl implements Game {
 
     @Override
     public void newGame() {
-
+        board.updateBoard();
     }
 
     @Override
@@ -66,6 +68,8 @@ public class GameImpl implements Game {
 
     @Override
     public void tick() {
-        this.gameIsRunning = false;
+        boxGenerator.tick();
+        board.updateBoard();
+
     }
 }

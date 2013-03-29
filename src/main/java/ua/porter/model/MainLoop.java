@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class MainLoop {
     public static void main(String[] args) {
         Game porterGame = new GameImpl(15);
+        porterGame.newGame();
         System.out.println(split(porterGame.getBoardAsString(), 15));
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -29,6 +30,7 @@ public class MainLoop {
             } else if (command.equals("w")) {
                 porterGame.getJoystick().up();
             }
+            porterGame.tick();
             System.out.println(split(porterGame.getBoardAsString(), 15));
         }
 

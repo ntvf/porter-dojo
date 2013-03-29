@@ -63,7 +63,6 @@ public class Board {
 
     public void addObject(GameObject entity) {
         objectsOnTheBoard.add(entity);
-        this.updateBoard();
     }
 
     public void addPorter(Porter porter) {
