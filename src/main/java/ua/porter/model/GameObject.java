@@ -13,9 +13,10 @@ public abstract class GameObject implements Joystick {
     protected int y;
     protected Board board;
 
-    public Event redraw() {
+    public void redraw() {
+
         board.getCell(this.x, this.y).setObject(this);
-        return new Event();
+
     }
 
     protected boolean shouldFell() {
@@ -32,7 +33,7 @@ public abstract class GameObject implements Joystick {
         if (shouldFell()) {
             clearContainingCell();
             this.y -= 1;
-            redraw();
+
         } else {
             isFlying = shouldFell();
         }
@@ -43,7 +44,6 @@ public abstract class GameObject implements Joystick {
         if (this.y < board.getDimensionFromZero()) {
             this.y += 1;
         }
-        redraw();
     }
 
     public void left() {
@@ -53,7 +53,7 @@ public abstract class GameObject implements Joystick {
         } else {
             this.x -= 1;
         }
-        redraw();
+
 
     }
 
@@ -64,13 +64,22 @@ public abstract class GameObject implements Joystick {
         } else {
             this.x += 1;
         }
-        redraw();
+
     }
 
 
     private void clearContainingCell() {
         board.clearCell(this.x, this.y);
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
 
     @Override
     public void act() {

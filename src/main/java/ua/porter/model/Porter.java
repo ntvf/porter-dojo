@@ -9,6 +9,8 @@ package ua.porter.model;
  */
 public class Porter extends GameObject {
     private boolean movedInJump;
+    protected OnEventListener onEventListener;
+
 
     public Porter(int startPosition, Board board) {
         this.board = board;
@@ -18,6 +20,26 @@ public class Porter extends GameObject {
 
     public String toString() {
         return ObjectsLiterals.porter;
+    }
+
+
+    public void check() {
+        GameObject objInCell = board.getCell(this.x, this.y).getObject();
+        if (objInCell == null) {
+            board.getCell(this.x, this.y).setObject(this);
+
+        } else {
+            if (!objInCell.equals(this)) {
+                int code;
+                if (objInCell.getX() < this.x) {
+                    code = Event.MOVING_LEFT;
+                } else {
+                    code = Event.MOVING_RIGHT;
+                }
+                onEventListener.onEvent(new Event(code, this, objInCell));
+            }
+
+        }
     }
 
     @Override
@@ -83,9 +105,12 @@ public class Porter extends GameObject {
             }
 
         }
+        check();
         if (canMoveLeft()) {
             super.left();
+
         }
+
     }
 
     @Override
@@ -103,8 +128,15 @@ public class Porter extends GameObject {
             }
 
         }
+        check();
         if (canMoveRight()) {
             super.right();
+
         }
     }
+
+    public void setOnEventListener(Board onEventListener) {
+        this.onEventListener = onEventListener;
+    }
+
 }

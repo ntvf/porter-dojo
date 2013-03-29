@@ -60,8 +60,9 @@ public class GameImplTest {
         Game ourGame = new GameImpl(4);
         ourGame.newGame();
         ourGame.getJoystick().left();
-        assertEquals("Porter is not moving left", "   ¤" +
-                "    " +
+        ourGame.tick();
+        assertEquals("Porter is not moving left", "    " +
+                "   ¤" +
                 "    " +
                 "  ♞ ", ourGame.getBoardAsString());
     }
@@ -72,8 +73,9 @@ public class GameImplTest {
         ourGame.newGame();
         ourGame.getJoystick().left();
         ourGame.getJoystick().right();
-        assertEquals("Porter is not moving right, but it can be if he csn't move left", "   ¤" +
-                "    " +
+        ourGame.tick();
+        assertEquals("Porter is not moving right, but it can be if he csn't move left", "    " +
+                "   ¤" +
                 "    " +
                 "   ♞", ourGame.getBoardAsString());
     }
@@ -83,8 +85,9 @@ public class GameImplTest {
         Game ourGame = new GameImpl(4);
         ourGame.newGame();
         ourGame.getJoystick().right();
-        assertEquals("Porter is not moving right", "   ¤" +
-                "    " +
+        ourGame.tick();
+        assertEquals("Porter is not moving right", "    " +
+                "   ¤" +
                 "    " +
                 "♞   ", ourGame.getBoardAsString());
     }
@@ -95,8 +98,9 @@ public class GameImplTest {
         ourGame.newGame();
         ourGame.getJoystick().up();
         ourGame.getJoystick().right();
-        assertEquals("Porter is not jumping right", "   ¤" +
-                "    " +
+        ourGame.tick();
+        assertEquals("Porter is not jumping right", "    " +
+                "   ¤" +
                 "♞   " +
                 "    ", ourGame.getBoardAsString());
     }
@@ -107,23 +111,25 @@ public class GameImplTest {
         ourGame.newGame();
         ourGame.getJoystick().up();
         ourGame.getJoystick().left();
-        assertEquals("Porter is not jumping left", "   ¤" +
-                "    " +
+        ourGame.tick();
+        assertEquals("Porter is not jumping left", "    " +
+                "   ¤" +
                 "  ♞ " +
                 "    ", ourGame.getBoardAsString());
     }
 
     @Test
-    public void PorterJumpingRight_AndFellingToTheGroun() {
+    public void PorterJumpingRight_AndFellingToTheGround() {
         Game ourGame = new GameImpl(4);
         ourGame.newGame();
         ourGame.getJoystick().up();
         ourGame.getJoystick().right();
         ourGame.tick();
         ourGame.getJoystick().right();
+        ourGame.tick();
         assertEquals("Porter is not jumping left and felling to the ground", "    " +
-                "   ¤" +
                 "    " +
+                "   ¤" +
                 "♞   ", ourGame.getBoardAsString());
     }
 
@@ -135,10 +141,11 @@ public class GameImplTest {
         ourGame.getJoystick().left();
         ourGame.tick();
         ourGame.getJoystick().left();
+        ourGame.tick();
 
         assertEquals("Porter is not jumping right and felling to the ground", "    " +
-                "   ¤" +
                 "    " +
+                "   ¤" +
                 "  ♞ ", ourGame.getBoardAsString());
     }
 
@@ -150,9 +157,10 @@ public class GameImplTest {
         ourGame.getJoystick().left();
         ourGame.tick();
         ourGame.getJoystick().up();
+        ourGame.tick();
         assertEquals("Porter is not felling down after up in left jump", "    " +
-                "   ¤" +
                 "    " +
+                "   ¤" +
                 "  ♞ ", ourGame.getBoardAsString());
     }
 
@@ -164,9 +172,10 @@ public class GameImplTest {
         ourGame.getJoystick().left();
         ourGame.tick();
         ourGame.getJoystick().left();
+        ourGame.tick();
         assertEquals("Porter is not felling down after left in left jump", "    " +
-                "   ¤" +
                 "    " +
+                "   ¤" +
                 "  ♞ ", ourGame.getBoardAsString());
     }
 
@@ -178,9 +187,10 @@ public class GameImplTest {
         ourGame.getJoystick().left();
         ourGame.tick();
         ourGame.getJoystick().right();
+        ourGame.tick();
         assertEquals("Porter is not felling down after right in left jump", "    " +
-                "   ¤" +
                 "    " +
+                "   ¤" +
                 "  ♞ ", ourGame.getBoardAsString());
     }
 
@@ -192,9 +202,10 @@ public class GameImplTest {
         ourGame.getJoystick().right();
         ourGame.tick();
         ourGame.getJoystick().up();
+        ourGame.tick();
         assertEquals("Porter is not felling down after up in right jump", "    " +
-                "   ¤" +
                 "    " +
+                "   ¤" +
                 "♞   ", ourGame.getBoardAsString());
     }
 
@@ -206,9 +217,10 @@ public class GameImplTest {
         ourGame.getJoystick().right();
         ourGame.tick();
         ourGame.getJoystick().left();
+        ourGame.tick();
         assertEquals("Porter is not felling down after left in right jump", "    " +
-                "   ¤" +
                 "    " +
+                "   ¤" +
                 "♞   ", ourGame.getBoardAsString());
     }
 
@@ -220,9 +232,10 @@ public class GameImplTest {
         ourGame.getJoystick().right();
         ourGame.tick();
         ourGame.getJoystick().right();
+        ourGame.tick();
         assertEquals("Porter is not felling down after right in right jump", "    " +
-                "   ¤" +
                 "    " +
+                "   ¤" +
                 "♞   ", ourGame.getBoardAsString());
     }
 
@@ -241,7 +254,8 @@ public class GameImplTest {
         ourGame.getJoystick().right();
         ourGame.tick();
         ourGame.getJoystick().right();
-        assertEquals("    " +
+        ourGame.tick();
+        assertEquals("   ¤" +
                 "    " +
                 "    " +
                 "  ♞¤", ourGame.getBoardAsString());
@@ -262,7 +276,8 @@ public class GameImplTest {
         ourGame.getJoystick().left();
         ourGame.tick();
         ourGame.getJoystick().left();
-        assertEquals("Porter is not felling down after right in right jump", "    " +
+        ourGame.tick();
+        assertEquals("Porter is not felling down after right in right jump", "   ¤" +
                 "    " +
                 "    " +
                 "♞  ¤", ourGame.getBoardAsString());

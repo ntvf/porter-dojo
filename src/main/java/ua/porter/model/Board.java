@@ -11,7 +11,7 @@ import java.util.List;
  * Time: 2:18 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Board {
+public class Board implements OnEventListener {
     private BoardCell[][] map;
     private List<GameObject> objectsOnTheBoard = new LinkedList<GameObject>();
     private Porter porter;
@@ -98,4 +98,17 @@ public class Board {
         return generatedMap;
     }
 
+    @Override
+    public void onEvent(Event event) {
+        System.out.println(event.getEventCode());
+        if (event.getEventCode() == Event.MOVING_RIGHT) {
+            event.getTaking().right();
+            event.getGenerating().right();
+        }
+
+        if (event.getEventCode() == Event.MOVING_LEFT) {
+            event.getTaking().left();
+            event.getGenerating().left();
+        }
+    }
 }
