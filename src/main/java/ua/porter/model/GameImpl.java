@@ -39,7 +39,7 @@ public class GameImpl implements Game {
 
     @Override
     public Joystick getJoystick() {
-        return board.getPorter();
+        return board.getJoyctick();
     }
 
     @Override

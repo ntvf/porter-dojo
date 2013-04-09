@@ -13,21 +13,24 @@ import java.util.List;
  */
 public class Board implements OnEventListener {
     private BoardCell[][] map;
-    private List<GameObject> objectsOnTheBoard = new LinkedList<GameObject>();
+    private List<GameObject> objectsOnTheBoard;
     private Porter porter;
 
     public Board(int dimension) {
         this.map = generateEmptyMap(dimension);
+        objectsOnTheBoard = new LinkedList<GameObject>();
     }
 
-    public Board(String lineMap) {      //TODO generate map from ready string
-
+    //TODO generate map from ready string
+    public Board(String lineMap) {
+        objectsOnTheBoard = new LinkedList<GameObject>();
     }
 
 
-    public Porter getPorter() {
+    public Joystick getJoyctick() {
         return porter;
     }
+
 
     public int getDimensionFromZero() {
         return map.length - 1;

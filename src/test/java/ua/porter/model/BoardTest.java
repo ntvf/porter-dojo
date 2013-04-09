@@ -1,8 +1,9 @@
 package ua.porter.model;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +14,7 @@ import org.junit.Test;
  */
 public class BoardTest {
     @Test
-    public void isTrueGanerted_EmptyMap() {
+    public void isTrueGenerated_EmptyMap() {
         Board board = new Board(3);
         BoardCell[][] result = board.getMap();
         BoardCell[][] expected = {{new BoardCell(0, 2), new BoardCell(1, 2), new BoardCell(2, 2)},
